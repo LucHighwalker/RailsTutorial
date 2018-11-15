@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-
   def index
     @articles = Article.all
   end
@@ -10,10 +9,10 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def new; 
-    @article = Article.new()
+  def new
+    @article = Article.new
   end
- 
+
   def edit
     @article = Article.find(params[:id])
   end
@@ -29,15 +28,22 @@ class ArticlesController < ApplicationController
       render 'new'
     end
   end
- 
+
   def update
     @article = Article.find(params[:id])
-   
+
     if @article.update(article_params)
       redirect_to @article
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+
+    redirect_to articles_path
   end
 
   private
